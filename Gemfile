@@ -7,6 +7,7 @@ gem 'rails-controller-testing'
 gem 'pg'
 #gem 'sqlite3'
 
+
 gem 'mandrill'	
 gem 'devise'
 gem 'fog'   #, '1.6.0'
@@ -41,9 +42,18 @@ gem 'friendly_id', '~> 5.0.0'
 #gem 'rmagick'
 
 group :test, :development do
+  gem 'minitest'
+  gem 'simplecov'
+  gem 'simplecov-lcov'
+	#gem 'undercover'
+  gem 'selenium-webdriver'
 #  gem 'factory_girl_rails'
-#  gem 'capybara'
 #  gem 'mocha', '~> 1.1.0'
+  gem 'apparition', '~> 0.2.0'
+  gem 'capybara'
+  gem 'capybara-screenshot', :group => :test
+  gem 'listen'
+  gem 'rails-controller-testing'
 end
 
 group :production do
