@@ -20,6 +20,10 @@
 <!--Actual panel-->
 <div class="panel panel-primary">
 <div class="panel-heading">
+
+    Want to support this project?
+  
+  <!-- Unneccesary
 	<% if user_signed_in? %>
 		<% if current_user.id == @user.id %>
 			Current Rewards
@@ -29,6 +33,7 @@
 	<% else %>
 		Support our work!
 	<% end %>
+  -->
 	<!--span class="badge pull-right"><#%= @user.merchandises.count %> Rewards</span> currently doesn't work-->
 </div>
 <div class="panel-body" id="merchSidebar">
@@ -87,7 +92,7 @@
             <% if (merch.buttontype) == 'Donate' %>
               <% buyPrice = ("Donate $" + sprintf('%.2f', merch.price) + "!") %>
             <% else %>
-              <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
+              <% buyPrice = ("Purchase for $" + sprintf('%.2f', merch.price) + "!") %>
             <% end %>
 				
             <% if @user.stripeid.present? || @user.id == 143 %>   
@@ -98,6 +103,8 @@
           <% end %>
   				
         <% else %>
+
+        <!-- removing deadline to donate money
           <% if (merch.deadline) != nil %>
             <% daysaway = (merch.deadline.to_date - Date.today.to_date).to_i %>
               <% if daysaway.nil? || daysaway.zero? %>
@@ -108,15 +115,17 @@
                 <td><%= ActionController::Base.helpers.pluralize(daysaway.to_s, 'day') %> left!</td>
               <% end %>
             <% end %>
+        -->
+  
 				
           <%if (merch.buttontype) == 'Donate'%>
             <% buyPrice = ("Donate $" + sprintf('%.2f', merch.price) + "!") %>
           <%else%>
-            <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
+            <% buyPrice = ("Purchase for $" + sprintf('%.2f', merch.price) + "!") %>
           <%end%>
 				
           <% if @user.stripeid.present? || @user.id == 143 %>   
-            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right", :target => "_blank" %>
+            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning", :target => "_blank" %>
           <% else %>
             <br> * <%= @user.name %> cannot accept funds yet
           <% end %>
@@ -129,7 +138,17 @@
 	<% else %>
 		<!--This is where the default Donate button are displayed-->
 		<!--To add or modify donation buttons and prices, it should be done through the code below only-->
+
         <% if @user.stripeid.present? || @user.id == 1337 || @user.id == 1345 %>
+
+        <!-- lets user pick an amount they want to donate-->
+          <input type="number" name="amount" id="amount" placeholder="$0.00 required" min="1.00" step="0.50">
+          <script type="text/javascript"> var amount = document.getElementByID('amount').value;</script>
+          <%= link_to amount, new_purchase_path(:pricesold => amount, :author_id => @user.id), method: :get%>
+          <input type="submit" name="donate" value="Donate">
+
+
+        <!-- Should not force a specific amount of money to donate they should be allowed to donate however much they want with a minimum of a dollar
             <% btnTxt = ("Donate $" + sprintf('%.2f',25) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 25.0, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
             <br /><br />
@@ -138,9 +157,12 @@
             <br /><br />
             <% btnTxt = ("Donate $" + sprintf('%.2f',100) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 100, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
+        -->
+
         <% else %>
           <%= @user.name %> has not made sales or donations available yet. 
         <% end %>
+
 	<% end %>
 </div>
 </div>

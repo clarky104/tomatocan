@@ -46,6 +46,10 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
+    apparition (0.2.0)
+      backports
+      capybara (~> 3.12, < 4)
+      websocket-driver (>= 0.6.5)
     arel (9.0.0)
     autoprefixer-rails (9.5.1.1)
       execjs
@@ -759,16 +763,30 @@ GEM
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
+    backports (3.15.0)
     bcrypt (3.1.12)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
     bootstrap-sass (3.2.0.4)
       sass (~> 3.2)
     builder (3.2.3)
+    capybara (3.25.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
+    capybara-screenshot (1.0.23)
+      capybara (>= 1.0, < 4)
+      launchy
     carrierwave (1.3.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    childprocess (1.0.1)
+      rake (< 13.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -788,6 +806,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    docile (1.3.2)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.1.2)
@@ -999,6 +1018,8 @@ GEM
       addressable
       faraday
       json (>= 1.8)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -1107,6 +1128,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       optimist (~> 3.0)
+    regexp_parser (1.5.1)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -1132,11 +1154,20 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (3.142.3)
+      childprocess (>= 0.5, < 2.0)
+      rubyzip (~> 1.2, >= 1.2.2)
     signet (0.11.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
+    simplecov (0.16.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
+    simplecov-lcov (0.7.0)
     socksify (1.7.1)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
@@ -1174,17 +1205,22 @@ GEM
       will_paginate (>= 3.0.3)
     xml-simple (1.1.5)
     xmlrpc (0.3.0)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  apparition (~> 0.2.0)
   autoprefixer-rails
   aws-sdk
   aws-sdk-s3
   bcrypt
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (~> 3.2.0)
+  capybara
+  capybara-screenshot
   carrierwave
   coffee-rails (~> 4.2.2)
   devise
@@ -1196,6 +1232,7 @@ DEPENDENCIES
   koala
   listen
   mandrill
+  minitest
   oauth2
   omniauth
   omniauth-facebook
@@ -1207,6 +1244,9 @@ DEPENDENCIES
   rails_real_favicon
   railties (= 5.2.1)
   sass-rails (~> 5.0.7)
+  selenium-webdriver
+  simplecov
+  simplecov-lcov
   stripe
   turbolinks
   turn
