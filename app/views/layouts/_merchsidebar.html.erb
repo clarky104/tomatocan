@@ -1,74 +1,74 @@
 <!--Modal for editing perk-->
 <div class="modal fade" tabindex="-1" id="myModal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-				<h4 class="modal-title">Edit Rewards</h4>
-			</div>
-			<div class="modal-body">
-				<!--= TAKE REWARD'S PASSABLE ID AND DISPLAY ITS FORM %-->
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary">Save Reward</button>
-			</div>
-		</div>
-	</div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">Edit Rewards</h4>
+      </div>
+      <div class="modal-body">
+        <!--= TAKE REWARD'S PASSABLE ID AND DISPLAY ITS FORM %-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save Reward</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--Actual panel-->
 <div class="panel panel-primary">
 <div class="panel-heading">
 
-    Want to support this project?
-  
-  <!-- Unneccesary
-	<% if user_signed_in? %>
-		<% if current_user.id == @user.id %>
-			Current Rewards
-		<% else %>
-			Support our work!
-		<% end %>
-	<% else %>
-		Support our work!
-	<% end %>
-  -->
-	<!--span class="badge pull-right"><#%= @user.merchandises.count %> Rewards</span> currently doesn't work-->
+  Want to support this project?
+
+  <!-- unncessary
+  <% if user_signed_in? %>
+    <% if current_user.id == @user.id %>
+      Current Rewards
+    <% else %>
+      Support our work!
+    <% end %>
+  <% else %>
+    Support our work!
+  <% end %>
+-->
+  <!--span class="badge pull-right"><#%= @user.merchandises.count %> Rewards</span> currently doesn't work-->
 </div>
 <div class="panel-body" id="merchSidebar">
   <% if @sidebarmerchandise.present? %>
     <% @sidebarmerchandise.each do |merch| %>
     <div class="media">
       <div class="pull-left">
-				<% if merch.itempic.present? %>
-					<%= image_tag merch.itempic.url.to_s, class: "media-object", id: "perkImage" %>
-				<% else %>
-					<%= image_tag "starIcon.png", class: "media-object", id: "perkImage" %>
-				<% end %>
-			</div>
+        <% if merch.itempic.present? %>
+          <%= image_tag merch.itempic.url.to_s, class: "media-object", id: "perkImage" %>
+        <% else %>
+          <%= image_tag "starIcon.png", class: "media-object", id: "perkImage" %>
+        <% end %>
+      </div>
       <div class="media-body">
         <h4 class="media-heading">
-					<%= link_to(merch.name, merchandise_path(merch.id, :groupid => params[:groupid]) ) %>
-				</h4>
+          <%= link_to(merch.name, merchandise_path(merch.id, :groupid => params[:groupid]) ) %>
+        </h4>
 
         <% if merch.desc.present? %>
           <% if merch.desc.length > 150 %>
             <div>
-						<%= truncate(merch.desc, length: 150) %>
-						<%= link_to 'more', '', class: "read-more-#{merch.id}" %>
-						<script>
-							$('.read-more-<%= merch.id %>').on('click', function(e) {
-							e.preventDefault()
-							$(this).parent().html('<%= escape_javascript merch.desc %>')
-											  })
-						</script>
-						</div>
+            <%= truncate(merch.desc, length: 150) %>
+            <%= link_to 'more', '', class: "read-more-#{merch.id}" %>
+            <script>
+              $('.read-more-<%= merch.id %>').on('click', function(e) {
+              e.preventDefault()
+              $(this).parent().html('<%= escape_javascript merch.desc %>')
+                        })
+            </script>
+            </div>
           <% else %>
             <%= merch.desc %>
           <% end %>
         <% end %>
-				
+        
         <% if user_signed_in? %>
           <% if current_user.id == @user.id %>
             <!--Links to seperate edit Reward page-->
@@ -76,7 +76,7 @@
 
             <!-- TODO: Switch to below button when edit Reward form can be shown as a modal-->
             <!--%= button_tag "Edit Reward", class: "btn btn-primary pull-right", "data-toggle" => "modal", "data-target" => "#myModal" %-->
-				
+        
           <% else %>
             <% if merch.deadline != nil && merch.deadline < 14.days %>
               <% daysaway = (merch.deadline.to_date - Date.today.to_date).to_i %>
@@ -88,23 +88,21 @@
                 <td><%= ActionController::Base.helpers.pluralize(daysaway.to_s, 'day') %> left!</td>
               <% end %>
             <% end %>
-				
+        
             <% if (merch.buttontype) == 'Donate' %>
               <% buyPrice = ("Donate $" + sprintf('%.2f', merch.price) + "!") %>
             <% else %>
-              <% buyPrice = ("Purchase for $" + sprintf('%.2f', merch.price) + "!") %>
+              <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
             <% end %>
-				
+        
             <% if @user.stripeid.present? || @user.id == 143 %>   
               <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right", :target => "_blank" %>
             <% else %>
               <br> * <%= @user.name %> cannot accept funds yet
             <% end %>
           <% end %>
-  				
+          
         <% else %>
-
-        <!-- removing deadline to donate money
           <% if (merch.deadline) != nil %>
             <% daysaway = (merch.deadline.to_date - Date.today.to_date).to_i %>
               <% if daysaway.nil? || daysaway.zero? %>
@@ -115,40 +113,54 @@
                 <td><%= ActionController::Base.helpers.pluralize(daysaway.to_s, 'day') %> left!</td>
               <% end %>
             <% end %>
-        -->
-  
-				
+        
           <%if (merch.buttontype) == 'Donate'%>
             <% buyPrice = ("Donate $" + sprintf('%.2f', merch.price) + "!") %>
           <%else%>
-            <% buyPrice = ("Purchase for $" + sprintf('%.2f', merch.price) + "!") %>
+            <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
           <%end%>
-				
+        
           <% if @user.stripeid.present? || @user.id == 143 %>   
-            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning", :target => "_blank" %>
+            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right", :target => "_blank" %>
           <% else %>
             <br> * <%= @user.name %> cannot accept funds yet
           <% end %>
-				
-				<% end %>
-			</div>
-		</div>
-		<hr>
-		<% end %>
-	<% else %>
-		<!--This is where the default Donate button are displayed-->
-		<!--To add or modify donation buttons and prices, it should be done through the code below only-->
-
+        
+        <% end %>
+      </div>
+    </div>
+    <hr>
+    <% end %>
+  <% else %>
+    <!--This is where the default Donate button are displayed-->
+    <!--To add or modify donation buttons and prices, it should be done through the code below only-->
         <% if @user.stripeid.present? || @user.id == 1337 || @user.id == 1345 %>
+          <div class = "form-group">
+            <div class ="input-group">
+              <div class="input-group-addon">$</div>
+              <input type="number" name="donate" id="donate" placeholder="0.00" min="0.50" step="0.50" required>
+              <br>
+            </div>
+          </div>
 
-        <!-- lets user pick an amount they want to donate-->
-          <input type="number" name="amount" id="amount" placeholder="$0.00 required" min="1.00" step="0.50">
-          <script type="text/javascript"> var amount = document.getElementByID('amount').value;</script>
-          <%= link_to amount, new_purchase_path(:pricesold => amount, :author_id => @user.id), method: :get%>
-          <input type="submit" name="donate" value="Donate">
+           
+
+           <input type="submit" onclick="getAmount()" name="amount" value="Donate" class="btn btn-warning btn-lg" >
 
 
-        <!-- Should not force a specific amount of money to donate they should be allowed to donate however much they want with a minimum of a dollar
+
+
+
+
+          <script type="text/javascript"> 
+            function getAmount(){  
+              document.getElementByID("donate").value;
+            }
+          </script>
+         
+            
+
+              <!--
             <% btnTxt = ("Donate $" + sprintf('%.2f',25) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 25.0, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
             <br /><br />
@@ -157,13 +169,11 @@
             <br /><br />
             <% btnTxt = ("Donate $" + sprintf('%.2f',100) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 100, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
-        -->
-
+          -->
         <% else %>
-          <%= @user.name %> has not made sales or donations available yet. 
+          <%= @user.name %> has not made any sales or donations available yet. 
         <% end %>
-
-	<% end %>
+  <% end %>
 </div>
 </div>
 
