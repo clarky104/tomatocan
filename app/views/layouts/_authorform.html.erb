@@ -45,11 +45,11 @@ if @user.genre3 ; @genrethree = "," + @user.genre3.gsub(/ +/, '-') else @genreth
 				</span>
 		<% end %>
 	</div>
-	<div class = "col-sm-8">
+</div>
+<div class = "col-sm-4" style="margin-left: 5%">
 		<% if @user.about.blank? == false %>
 			<span id="userAbout"> <%= @user.about %>
 		<% end %>
-	</div>
 </div>
 
 

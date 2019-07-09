@@ -94,9 +94,9 @@
             <% else %>
               <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
             <% end %>
-        
+            
             <% if @user.stripeid.present? || @user.id == 143 %>   
-              <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right", :target => "_blank" %>
+              <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right",  :target => "_blank" %>
             <% else %>
               <br> * <%= @user.name %> cannot accept funds yet
             <% end %>
@@ -120,8 +120,9 @@
             <% buyPrice = ("Buy for $" + sprintf('%.2f', merch.price) + "!") %>
           <%end%>
         
-          <% if @user.stripeid.present? || @user.id == 143 %>   
-            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning pull-right", :target => "_blank" %>
+          <% if @user.stripeid.present? || @user.id == 143 %>  
+          <br><br> 
+            <%= link_to buyPrice, new_purchase_path(:merchandise_id => merch.id), method: :get, :class => "btn btn-warning ", :target => "_blank" %>
           <% else %>
             <br> * <%= @user.name %> cannot accept funds yet
           <% end %>
@@ -135,32 +136,30 @@
     <!--This is where the default Donate button are displayed-->
     <!--To add or modify donation buttons and prices, it should be done through the code below only-->
         <% if @user.stripeid.present? || @user.id == 1337 || @user.id == 1345 %>
-          <div class = "form-group">
+          <div class = "form-group" style="text-align: center;">
             <div class ="input-group">
               <div class="input-group-addon">$</div>
-              <input type="number" name="donate" id="donate" placeholder="0.00" min="0.50" step="0.50" required>
+              <input type="number" id="DONATE" oninput="setTwoNumberDecimal(this)" onclick="getAmount()" class="form-control" placeholder="0.00"  min="0.50" step="0.50" required>
               <br>
             </div>
+            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
           </div>
 
-           
-
-           <input type="submit" onclick="getAmount()" name="amount" value="Donate" class="btn btn-warning btn-lg" >
-
-
-
-
-
-
-          <script type="text/javascript"> 
-            function getAmount(){  
-              document.getElementByID("donate").value;
+           <!-- displays the value in money format-->
+          <script>
+            function setTwoNumberDecimal(m) {
+              m.value = parseFloat(m.value).toFixed(2);
             }
           </script>
-         
-            
+          <!-- retrieves the amount wanting to donate -->
+          <script>
+            function getAmount() {
+              var x = document.getElementById("donate").value;
+              document.getElementById("amount").innerHTML = x;
+            }
+          </script>
 
-              <!--
+            <!--
             <% btnTxt = ("Donate $" + sprintf('%.2f',25) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 25.0, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
             <br /><br />
@@ -170,6 +169,7 @@
             <% btnTxt = ("Donate $" + sprintf('%.2f',100) + "!") %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 100, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
           -->
+
         <% else %>
           <%= @user.name %> has not made any sales or donations available yet. 
         <% end %>
