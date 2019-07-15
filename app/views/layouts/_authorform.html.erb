@@ -28,14 +28,14 @@ if @user.genre3 ; @genrethree = "," + @user.genre3.gsub(/ +/, '-') else @genreth
 			<%= image_tag @user.profilepic.url.to_s, :class => "img-circle", :id => "profileImage" %>
 		</div>
 	<% else %>
-		<div class="col-sm-2">
+		<div class="col-sm-3">
 			<%= image_tag "maroonLogo.png", :class => "img-circle", :id => "profileImage", style: "background-color:white" %>
 		</div>
 	<% end %>
-	<div class="col-sm-8">
-		<h1 id="profileName"><%= @user.name %></h1>
+	<div class="col-sm-6">
+		<h1 id="profileName" style="color: #ffffff"><%= @user.name %></h1>
 		<% if @user.genre1.blank? == false %> 
-			<span id="profileDescription"> <%= @user.genre1 %>
+			<span id="profileDescription" style="color: #ffffff"> <%= @user.genre1 %>
 				<% if @user.genre2.blank? == false %> 
 				, <%= @user.genre2 %>
 				<% end %>
@@ -46,8 +46,9 @@ if @user.genre3 ; @genrethree = "," + @user.genre3.gsub(/ +/, '-') else @genreth
 		<% end %>
 	</div>
 </div>
-<div class = "col-sm-4" style="margin-left: 5%">
+<div class = "col-sm-4" style="margin-left: 10%; font-size: 16px">
 		<% if @user.about.blank? == false %>
+		<br>
 			<span id="userAbout"> <%= @user.about %>
 		<% end %>
 </div>

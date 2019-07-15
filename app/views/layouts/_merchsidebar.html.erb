@@ -140,9 +140,9 @@
             <div class ="input-group">
               <div class="input-group-addon">$</div>
               <input type="number" id="DONATE" oninput="setTwoNumberDecimal(this)" onclick="getAmount()" class="form-control" placeholder="0.00"  min="0.50" step="0.50" required>
-              <br>
             </div>
-            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
+            <br>
+            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn", :target => "_blank" %>
           </div>
 
            <!-- displays the value in money format-->
