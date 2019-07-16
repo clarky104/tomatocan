@@ -137,12 +137,13 @@
     <!--To add or modify donation buttons and prices, it should be done through the code below only-->
         <% if @user.stripeid.present? || @user.id == 1337 || @user.id == 1345 %>
           <div class = "form-group" style="text-align: center;">
+             <p> Enter a donation amount</p>
             <div class ="input-group">
               <div class="input-group-addon">$</div>
               <input type="number" id="DONATE" oninput="setTwoNumberDecimal(this)" onclick="getAmount()" class="form-control" placeholder="0.00"  min="0.50" step="0.50" required>
             </div>
             <br>
-            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn", :target => "_blank" %>
+            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg btn", :target => "_blank" %>
           </div>
 
            <!-- displays the value in money format-->

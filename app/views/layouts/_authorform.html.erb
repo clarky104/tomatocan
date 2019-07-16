@@ -45,14 +45,19 @@ if @user.genre3 ; @genrethree = "," + @user.genre3.gsub(/ +/, '-') else @genreth
 				</span>
 		<% end %>
 	</div>
+	<div class="col-xs-3" style="position: relative; left: 7; bottom: 10%"%>
+		<%= render 'layouts/streamButton' %>
+	</div>
+	
 </div>
-<div class = "col-sm-4" style="margin-left: 10%; font-size: 16px">
+
+<div class="col-sm-3">
 		<% if @user.about.blank? == false %>
 		<br>
+		<h1>About the Host</h1>
 			<span id="userAbout"> <%= @user.about %>
 		<% end %>
 </div>
-
 
 <!--This is what shows up in Facebook when you past a link to this page into a comment-->
 <% content_for :forusers do %>

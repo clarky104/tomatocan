@@ -26,8 +26,8 @@
 		localhost:3000/username
 			-->
 			<%= render 'layouts/authorform' %>
-			<div class="row" style=" text-align:right; padding: 0% 2.1%; padding-top:15px;padding-bottom:70px">
-					<%= render 'layouts/streamButton' %>
+			<div class="row" style=" padding-top:5px;padding-bottom:5px">
+
 			</div>
 			<% flash.each do |key, value| %>
 				<div class="alert alert-<%= key %> alert-dismissible" role="alert">
@@ -35,7 +35,8 @@
 				  <%= value %>
 				 </div>
 			<% end %>
-			<div class="row" style="padding: 0% 10%">
+
+			<div class="row" style="padding: 0% 5%; padding-bottom: 20%">
 				<div class="col-md-4">
 					<%= render 'layouts/merchsidebar' %>
 				</div>

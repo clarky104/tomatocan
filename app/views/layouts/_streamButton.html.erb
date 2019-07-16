@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div style="position:relative; padding-right: 10%; text-align: center;">
 	<% if user_signed_in? %>
 		<% if current_user.id == @user.id %>
 			<%= link_to "START YOUR LIVE SHOW", "https://crowdpublishtv.herokuapp.com/" + @user.permalink, :class => 'btn btn-lg btn-warning' %> 
@@ -9,8 +9,8 @@
 			<%= link_to "JOIN LIVE SHOW", "https://crowdpublishtv.herokuapp.com/" + @user.permalink, :class => 'btn btn-lg btn-warning' %>
 		<% end %>
 	<% else %>
-		<%= link_to "JOIN LIVE SHOW", "https://crowdpublishtv.herokuapp.com/" + @user.permalink, :class => 'btn btn-lg btn-warning' %>
-		<br><br>
 		<%= link_to "SHARE", new_event_path, :class => "btn btn-lg btn-warning" %> 
+		<br><br>
+		<%= link_to "JOIN LIVE SHOW", "https://crowdpublishtv.herokuapp.com/" + @user.permalink, :class => 'btn btn-lg btn-warning' %>
 	<% end %>
 </div>
