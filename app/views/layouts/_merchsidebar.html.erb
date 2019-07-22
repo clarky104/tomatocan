@@ -136,40 +136,18 @@
     <!--This is where the default Donate button are displayed-->
     <!--To add or modify donation buttons and prices, it should be done through the code below only-->
         <% if @user.stripeid.present? || @user.id == 1337 || @user.id == 1345 %>
-          <div class = "form-group" style="text-align: center;">
-             <p> Enter a donation amount</p>
-            <div class ="input-group">
-              <div class="input-group-addon">$</div>
-              <input type="number" id="DONATE" oninput="setTwoNumberDecimal(this)" onclick="getAmount()" class="form-control" placeholder="0.00"  min="0.50" step="0.50" required>
-            </div>
-            <br>
-            <%= link_to "DONATE", new_purchase_path(:pricesold => "amount", :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg btn", :target => "_blank" %>
-          </div>
-
-           <!-- displays the value in money format-->
-          <script>
-            function setTwoNumberDecimal(m) {
-              m.value = parseFloat(m.value).toFixed(2);
-            }
-          </script>
-          <!-- retrieves the amount wanting to donate -->
-          <script>
-            function getAmount() {
-              var x = document.getElementById("donate").value;
-              document.getElementById("amount").innerHTML = x;
-            }
-          </script>
-
-            <!--
-            <% btnTxt = ("Donate $" + sprintf('%.2f',25) + "!") %>
+            
+        <div style="padding: 0% 30%">
+            <% btnTxt = ("Donate $" + sprintf('%.2f',25)) %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 25.0, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
             <br /><br />
-            <% btnTxt = ("Donate $" + sprintf('%.2f',50) + "!") %>
+            <% btnTxt = ("Donate $" + sprintf('%.2f',50)) %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 50, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
             <br /><br />
-            <% btnTxt = ("Donate $" + sprintf('%.2f',100) + "!") %>
+            <% btnTxt = ("Donate $" + sprintf('%.2f',100)) %>
             <%= link_to btnTxt, new_purchase_path(:pricesold => 100, :author_id => @user.id), method: :get, :class => "btn btn-warning btn-lg", :target => "_blank" %>
-          -->
+            </div>
+        
 
         <% else %>
           <%= @user.name %> has not made any sales or donations available yet. 

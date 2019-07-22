@@ -26,7 +26,7 @@
 		localhost:3000/username
 			-->
 			<%= render 'layouts/authorform' %>
-			<div class="row" style=" padding-top:5px;padding-bottom:5px">
+			<div class="row" style=" padding-top:15px;padding-bottom:5px">
 
 			</div>
 			<% flash.each do |key, value| %>
@@ -36,7 +36,7 @@
 				 </div>
 			<% end %>
 
-			<div class="row" style="padding: 0% 5%; padding-bottom: 20%">
+			<div class="row" style="  padding: 0% 5%">
 				<div class="col-md-4">
 					<%= render 'layouts/merchsidebar' %>
 				</div>
@@ -44,5 +44,8 @@
 					<%= render 'layouts/youtube' %>
 				</div>
 		</div>
+		<div style="padding: 2% 25%; padding-top: 12%">
+		<%= render 'layouts/donationbox' %>
+		
       <% end %>
 	</div>
